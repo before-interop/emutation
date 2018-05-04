@@ -1,4 +1,3 @@
-
 <wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://interop-fibre.fr/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Emutation" targetNamespace="http://interop-fibre.fr/">
 	<wsdl:types>
 		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://interop-fibre.fr/">
@@ -177,7 +176,7 @@
 				<xs:sequence>
 					<xs:element name="CodeHexacleVoie"  nillable="true" type="xs:string"/>
 					<xs:element minOccurs="0" name="ComplementNumeroVoie" type="xs:string"/>
-					<xs:element name="NumeroVoie" type="xs:unsignedInt"/>
+					<xs:element name="NumeroVoie" type="xs:nonNegativeInteger"/>
 				</xs:sequence>
 			</xs:complexType>
 			<xs:element name="ReferenceHexacleVoieType" nillable="true" type="tns:ReferenceHexacleVoieType"/>
@@ -186,7 +185,7 @@
 					<xs:element name="CodeInsee"  nillable="true" type="xs:string"/>
 					<xs:element name="CodeRivoli"  nillable="true" type="xs:string"/>
 					<xs:element minOccurs="0" name="ComplementNumeroVoie" type="xs:string" />
-					<xs:element name="NumeroVoie" type="xs:unsignedInt"/>
+					<xs:element name="NumeroVoie" type="xs:nonNegativeInteger"/>
 				</xs:sequence>
 			</xs:complexType>
 			<xs:element name="ReferenceRivoliType" nillable="true" type="tns:ReferenceRivoliType"/>
@@ -219,7 +218,7 @@
 			<xs:element name="ConsultationFibresPBOReponse" nillable="true" type="tns:ConsultationFibresPBOReponse"/>
 			<xs:complexType name="ListeFibreType">
 				<xs:sequence>
-					<xs:element minOccurs="0" name="Fibres" nillable="true" type="tns:FibreType"/>
+					<xs:element minOccurs="0" maxOccurs="unbounded" name="Fibres" nillable="true" type="tns:FibreType"/>
 				</xs:sequence>
 			</xs:complexType>
 			<xs:complexType name="FibreType">
@@ -233,12 +232,15 @@
 				</xs:sequence>
 			</xs:complexType>
 			<xs:element name="FibreType" nillable="true" type="tns:FibreType"/>
-			<xs:complexType name="EtatFibreType">
-				<xs:sequence>
-					<xs:element minOccurs="0" name="EtatFibre" nillable="true" type="xs:string"/>
-				</xs:sequence>
-			</xs:complexType>
-			<xs:element name="EtatFibreType" nillable="true" type="tns:EtatFibreType"/>
+			<xsd:simpleType name="EtatFibreType">
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="fibre disponible"/>
+					<xsd:enumeration value="fibre dédiée disponible"/>
+					<xsd:enumeration value="fibre réservée"/>
+					<xsd:enumeration value="fibre occupée"/>
+					<xsd:enumeration value="fibre hors service"/>
+				</xsd:restriction>
+			</xsd:simpleType>
 			<xs:complexType name="MiseAJourRouteOptiqueDemande">
 				<xs:sequence>
 					<xs:element name="Batiment" nillable="true" type="xs:string"/>
