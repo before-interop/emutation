@@ -1,0 +1,13 @@
+language: php
+
+php:
+  - '5.4'
+  - '5.6'
+  - '7.1'
+
+install:
+  - composer require wsdl2phpgenerator/wsdl2phpgenerator
+  - composer dumpautoload
+
+script:
+  - php php/src/build.php
