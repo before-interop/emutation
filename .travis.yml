@@ -21,6 +21,6 @@ script:
   - php php/src/build.php
   - cd go && make client
   - jdk_switcher use oraclejdk8
-  - cd java && mvn clean compile
+  - mvn -f java/pom.xml clean install
   - jdk_switcher use openjdk8
-  - cd java && mvn clean compile
+  - mvn -f java/pom.xml clean install
