@@ -14,4 +14,11 @@
      - Ajout d'un maxOccurs="unbounded" car sans cet attribut on ne pouvait mette qu'un élément dans le tableau
   - Remplacement du type complexe "EtatFibreType" en énumérateur
      - Cela permettra que seule les valeurs prévues dans la documentation puisse passer
+- v0.4: Ajout d'une version modifiée incluant les modifications suivante
+  - Suppression des namespaces microsoft
+     - Suppression des namespaces microsofts qui peuvent poser problème lors de l'intégration du fichier wsdl
+  - Ajout de restrictions sur le format des champs
+     - Ajout de restrictions sur la longueurs des champs comme spécifié dans la documentation
+  - Modification du type ListeRouteOptique
+     - Ajout d'un maxOccurs=4 afin de respecter la documentation
   
