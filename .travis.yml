@@ -1,4 +1,8 @@
-language: php, go
+language: php, go, java
+
+jdk:
+  - oraclejdk8
+  - openjdk8
 
 go:
   - "1.8"
@@ -16,3 +20,7 @@ install:
 script:
   - php php/src/build.php
   - cd go && make client
+  - jdk_switcher use oraclejdk8
+  - cd java && mvn clean compile
+  - jdk_switcher use openjdk8
+  - cd java && mvn clean compile
