@@ -1,476 +1,448 @@
-<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://interop-fibre.fr/Emutation/1.0/"  xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Emutation" targetNamespace="http://interop-fibre.fr/Emutation/1.0/">
-	<wsdl:types>
-		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://interop-fibre.fr/Emutation/1.0/">
-			<xs:element name="RecherchePBO">
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element xmlns:q1="http://interop-fibre.fr/Emutation/1.0/" minOccurs="0" name="demande" type="q1:RecherchePBODemande"/>
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="RecherchePBOResponse">
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element xmlns:q2="http://interop-fibre.fr/Emutation/1.0/" minOccurs="0" name="RecherchePBOResult" type="q2:RecherchePBOReponse"/>
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="ConsultationFibres">
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element xmlns:q3="http://interop-fibre.fr/Emutation/1.0/" minOccurs="0" name="demande" type="q3:ConsultationFibresDemande"/>
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="ConsultationFibresResponse">
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element xmlns:q4="http://interop-fibre.fr/Emutation/1.0/" minOccurs="0" name="ConsultationFibresResult" type="q4:ConsultationFibresPBOReponse"/>
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="MiseAJourRouteOptique">
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element xmlns:q5="http://interop-fibre.fr/Emutation/1.0/" minOccurs="0" name="demande" type="q5:MiseAJourRouteOptiqueDemande"/>
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="MiseAJourRouteOptiqueResponse">
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element xmlns:q6="http://interop-fibre.fr/Emutation/1.0/" minOccurs="0" name="MiseAJourRouteOptiqueResult" type="q6:MiseAJourRouteOptiqueReponse"/>
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-		</xs:schema>
-		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://interop-fibre.fr/Emutation/1.0/" elementFormDefault="qualified" targetNamespace="http://interop-fibre.fr/Emutation/1.0/">
-			<xs:complexType name="RecherchePBODemande">
-				<xs:sequence>
-					<xs:element name="Entete" nillable="true" type="tns:EnteteRequeteType"/>
-					<xs:element minOccurs="0" name="ReferenceCommandePriseInterneOC" nillable="true">
-						<xs:simpleType>
-							<xs:restriction base="xs:string">
-							  <xs:minLength value="0"/>
-							  <xs:maxLength value="20"/>
-							</xs:restriction>
-						</xs:simpleType>
-					</xs:element>
-					<xs:element minOccurs="0" name="ReferencePrestationPrise" nillable="true">
-						<xs:simpleType>
-							<xs:restriction base="xs:string">
-							  <xs:minLength value="0"/>
-							  <xs:maxLength value="20"/>
-							</xs:restriction>
-						</xs:simpleType>
-					</xs:element>
-				</xs:sequence>
-			</xs:complexType>
-			<xs:element name="RecherchePBODemande" nillable="true" type="tns:RecherchePBODemande"/>
-			<xs:complexType name="EnteteRequeteType">
-				<xs:sequence>
-					<xs:element name="HorodatageRequete" type="xs:dateTime"/>
-					<xs:element name="OperateurCommercial" nillable="true" type="tns:OperateurCommercialType"/>
-					<xs:element name="VersionWS" nillable="true" type="xs:string"/>
-				</xs:sequence>
-			</xs:complexType>
-			<xs:element name="EnteteRequeteType" nillable="true" type="tns:EnteteRequeteType"/>
-			<xs:complexType name="OperateurCommercialType">
-				<xs:sequence>
-					<xs:element minOccurs="0" name="Identifiant" nillable="true" type="xs:string"/>
-					<xs:element name="Nom" nillable="true" type="xs:string"/>
-				</xs:sequence>
-			</xs:complexType>
-			<xs:element name="OperateurCommercialType" nillable="true" type="tns:OperateurCommercialType"/>
-			<xs:complexType name="RecherchePBOReponse">
-				<xs:sequence>
-					<xs:element name="CodeRetour" nillable="true" type="tns:CodeRetourType"/>
-					<xs:element name="Entete" nillable="true" type="tns:EnteteReponseType"/>
-					<xs:element name="ListePBO" nillable="true" type="tns:ListePboType"/>
-				</xs:sequence>
-			</xs:complexType>
-			<xs:element name="RecherchePBOReponse" nillable="true" type="tns:RecherchePBOReponse"/>
-			<xs:complexType name="CodeRetourType">
-				<xs:sequence>
-					<xs:element minOccurs="0" name="CodeErreur" nillable="true" type="xs:string"/>
-					<xs:element name="CodeRetour" type="xs:int"/>
-					<xs:element minOccurs="0" name="LibelleErreur" nillable="true" type="xs:string"/>
-				</xs:sequence>
-			</xs:complexType>
-			<xs:element name="CodeRetourType" nillable="true" type="tns:CodeRetourType"/>
-			<xs:complexType name="EnteteReponseType">
-				<xs:sequence>
-					<xs:element name="HorodatageReponse" type="xs:dateTime"/>
-					<xs:element name="HorodatageRequete" type="xs:dateTime"/>
-					<xs:element name="IdentifiantReponse" type="xs:int"/>
-					<xs:element name="OperateurCommercial" nillable="true" type="tns:OperateurCommercialType"/>
-					<xs:element name="VersionWS" nillable="true" type="xs:string"/>
-				</xs:sequence>
-			</xs:complexType>
-			<xs:element name="EnteteReponseType" nillable="true" type="tns:EnteteReponseType"/>
-			<xs:complexType name="ListePboType">
-				<xs:sequence>
-					<xs:element minOccurs="0" maxOccurs="unbounded" name="Pbo" nillable="true" type="tns:PboType"/>
-				</xs:sequence>
-			</xs:complexType>
-			<xs:element name="ListePboType" nillable="true" type="tns:ListePboType"/>
-			
-			<xs:complexType name="PboType">
-				<xs:sequence>
-					<xs:element name="AdressePBO" nillable="true" type="tns:AdressePBOReponseType"/>
-					<xs:element minOccurs="0" name="NaturePBO" nillable="true" type="xs:string"/>
-					<xs:element minOccurs="0" name="NombreFibresDisponibles" type="xs:int"/>
-					<xs:element name="ReferencePBO" nillable="true" type="xs:string"/>
-					<xs:element name="ReferencePM"  nillable="true" type="xs:string"/>
-					<xs:element name="StructurePBO" nillable="true" type="tns:StructureVerticalePBOType"/>
-				</xs:sequence>
-			</xs:complexType>
-			<xs:element name="PboType" nillable="true" type="tns:PboType"/>
-			<xs:complexType name="AdressePBOReponseType">
-				<xs:sequence>
-					<xs:element minOccurs="0" name="AdressePBO" nillable="true" type="xs:string"/>
-					<xs:element minOccurs="0" name="ReferenceGeographique" nillable="true" type="tns:CoordonneesGeographiquesType"/>
-					<xs:element minOccurs="0" name="ReferenceHexacle" nillable="true" type="xs:string"/>
-					<xs:element minOccurs="0" name="ReferenceHexacleVoie" nillable="true" type="tns:ReferenceHexacleVoieType"/>
-					<xs:element minOccurs="0" name="ReferenceRivoli" nillable="true" type="tns:ReferenceRivoliType"/>
-				</xs:sequence>
-			</xs:complexType>
-			<xs:element name="AdressePBOReponseType" nillable="true" type="tns:AdressePBOReponseType"/>
-			<xs:complexType name="CoordonneesGeographiquesType">
-				<xs:sequence>
-					<xs:element minOccurs="0" name="CoordonneesX" nillable="true" type="xs:string"/>
-					<xs:element minOccurs="0" name="CoordonneesY" nillable="true" type="xs:string"/>
-					<xs:element name="TypeProjection" nillable="true" type="xs:string"/>
-				</xs:sequence>
-			</xs:complexType>
-			<xs:element name="CoordonneesGeographiquesType" nillable="true" type="tns:CoordonneesGeographiquesType"/>
-			<xs:complexType name="ReferenceHexacleVoieType">
-				<xs:sequence>
-					<xs:element name="CodeHexacleVoie"  nillable="true" type="xs:string"/>
-					<xs:element minOccurs="0" name="ComplementNumeroVoie" type="xs:string"/>
-					<xs:element name="NumeroVoie" type="xs:nonNegativeInteger"/>
-				</xs:sequence>
-			</xs:complexType>
-			<xs:element name="ReferenceHexacleVoieType" nillable="true" type="tns:ReferenceHexacleVoieType"/>
-			<xs:complexType name="ReferenceRivoliType">
-				<xs:sequence>
-					<xs:element name="CodeInsee"  nillable="true" type="xs:string"/>
-					<xs:element name="CodeRivoli"  nillable="true" type="xs:string"/>
-					<xs:element minOccurs="0" name="ComplementNumeroVoie" type="xs:string" />
-					<xs:element name="NumeroVoie" type="xs:nonNegativeInteger"/>
-				</xs:sequence>
-			</xs:complexType>
-			<xs:element name="ReferenceRivoliType" nillable="true" type="tns:ReferenceRivoliType"/>
-			<xs:complexType name="StructureVerticalePBOType">
-				<xs:sequence>
-					<xs:element name="Batiment" nillable="true" type="xs:string"/>
-					<xs:element name="Escalier" nillable="true" type="xs:string"/>
-					<xs:element name="Etage" nillable="true" type="xs:string"/>
-				</xs:sequence>
-			</xs:complexType>
-			<xs:element name="StructureVerticalePBOType" nillable="true" type="tns:StructureVerticalePBOType"/>
-			<xs:complexType name="ConsultationFibresDemande">
-				<xs:sequence>
-					<xs:element name="Entete" nillable="true" type="tns:EnteteRequeteType"/>
-					<xs:element minOccurs="0" name="ReferenceCommandePriseInterneOC" nillable="true">
-						<xs:simpleType>
-							<xs:restriction base="xs:string">
-							  <xs:minLength value="0"/>
-							  <xs:maxLength value="20"/>
-							</xs:restriction>
-						</xs:simpleType>
-					</xs:element>
-					<xs:element minOccurs="0" name="ReferencePBO" nillable="true" type="xs:string"/>
-					<xs:element minOccurs="0" name="ReferencePM" nillable="true" type="xs:string"/>
-					<xs:element minOccurs="0" name="ReferencePrestationPrise" nillable="true">
-						<xs:simpleType>
-							<xs:restriction base="xs:string">
-							  <xs:minLength value="0"/>
-							  <xs:maxLength value="20"/>
-							</xs:restriction>
-						</xs:simpleType>
-					</xs:element>
-				</xs:sequence>
-			</xs:complexType>
-			<xs:element name="ConsultationFibresDemande" nillable="true" type="tns:ConsultationFibresDemande"/>
-			<xs:complexType name="ConsultationFibresPBOReponse">
-				<xs:sequence>
-					<xs:element name="CodeRetour" nillable="true" type="tns:CodeRetourType"/>
-					<xs:element name="Entete" nillable="true" type="tns:EnteteReponseType"/>
-					<xs:element name="Fibre" nillable="true" type="tns:ListeFibreType"/>
-					<xs:element name="PboType" nillable="true" type="tns:PboType"/>
-				</xs:sequence>
-			</xs:complexType>
-			<xs:element name="ConsultationFibresPBOReponse" nillable="true" type="tns:ConsultationFibresPBOReponse"/>
-			<xs:complexType name="ListeFibreType">
-				<xs:sequence>
-					<xs:element minOccurs="0" maxOccurs="unbounded" name="Fibres" nillable="true" type="tns:FibreType"/>
-				</xs:sequence>
-			</xs:complexType>
-			<xs:complexType name="FibreType">
-				<xs:sequence>
-					<xs:element name="EtatFibre" nillable="true" type="tns:EtatFibreType"/>
-					<xs:element name="IdentifiantFibre" nillable="true" type="xs:string"/>
-					<xs:element name="InformationFibrePBO" nillable="true" type="xs:string"/>
-					<xs:element name="InformationTubePBO" nillable="true" type="xs:string"/>
-					<xs:element minOccurs="0" name="ReferenceCablePBO" nillable="true" type="xs:string"/>
-					<xs:element minOccurs="0" name="ReferencePrise" nillable="true" type="xs:string"/>
-				</xs:sequence>
-			</xs:complexType>
-			<xs:element name="FibreType" nillable="true" type="tns:FibreType"/>
-			<xsd:simpleType name="EtatFibreType">
-				<xsd:restriction base="xsd:string">
-					<xsd:enumeration value="fibre disponible"/>
-					<xsd:enumeration value="fibre dédiée disponible"/>
-					<xsd:enumeration value="fibre réservée"/>
-					<xsd:enumeration value="fibre occupée"/>
-					<xsd:enumeration value="fibre hors service"/>
-				</xsd:restriction>
-			</xsd:simpleType>
-			<xs:complexType name="MiseAJourRouteOptiqueDemande">
-				<xs:sequence>
-					<xs:element name="Batiment" nillable="true">
-						<xs:simpleType>
-							<xs:restriction base="xs:string">
-							  <xs:minLength value="0"/>
-							  <xs:maxLength value="60"/>
-							</xs:restriction>
-						</xs:simpleType>
-					</xs:element>
-					<xs:element minOccurs="0" name="BatimentTerrain" nillable="true">
-						<xs:simpleType>
-							<xs:restriction base="xs:string">
-							  <xs:minLength value="0"/>
-							  <xs:maxLength value="60"/>
-							</xs:restriction>
-						</xs:simpleType>
-					</xs:element>
-					<xs:element name="CodeRetour" nillable="true" type="tns:CodeRetourType"/>
-					<xs:element name="Entete" nillable="true" type="tns:EnteteRequeteType"/>
-					<xs:element name="Escalier" nillable="true">
-						<xs:simpleType>
-							<xs:restriction base="xs:string">
-							  <xs:minLength value="0"/>
-							  <xs:maxLength value="25"/>
-							</xs:restriction>
-						</xs:simpleType>
-					</xs:element>
-					<xs:element minOccurs="0" name="EscalierTerrain" nillable="true">
-						<xs:simpleType>
-							<xs:restriction base="xs:string">
-							  <xs:minLength value="0"/>
-							  <xs:maxLength value="25"/>
-							</xs:restriction>
-						</xs:simpleType>
-					</xs:element>
-					<xs:element name="Etage" nillable="true" >
-						<xs:simpleType>
-							<xs:restriction base="xs:string">
-							  <xs:minLength value="0"/>
-							  <xs:maxLength value="25"/>
-							</xs:restriction>
-						</xs:simpleType>
-					</xs:element>
-					<xs:element minOccurs="0" name="EtageTerrain" nillable="true">
-						<xs:simpleType>
-							<xs:restriction base="xs:string">
-							  <xs:minLength value="0"/>
-							  <xs:maxLength value="25"/>
-							</xs:restriction>
-						</xs:simpleType>
-					</xs:element>
-					<xs:element name="IdentifiantFibre" nillable="true">
-						<xs:simpleType>
-							<xs:restriction base="xs:string">
-							  <xs:minLength value="0"/>
-							  <xs:maxLength value="30"/>
-							</xs:restriction>
-						</xs:simpleType>
-					</xs:element>
-					<xs:element name="MotifMutation" nillable="true" type="xs:string"/>
-					<xs:element minOccurs="0" name="PorteTerrain" nillable="true">
-						<xs:simpleType>
-							<xs:restriction base="xs:string">
-							  <xs:minLength value="0"/>
-							  <xs:maxLength value="25"/>
-							</xs:restriction>
-						</xs:simpleType>
-					</xs:element>
-					<xs:element name="ReferenceAdresse" nillable="true" type="tns:ReferenceAdresseDemandeType"/>
-					<xs:element minOccurs="0" name="ReferenceCommandePriseInterneOC" nillable="true">
-						<xs:simpleType>
-							<xs:restriction base="xs:string">
-							  <xs:minLength value="0"/>
-							  <xs:maxLength value="20"/>
-							</xs:restriction>
-						</xs:simpleType>
-					</xs:element>
-					<xs:element minOccurs="0" name="ReferencePrestationPrise" nillable="true">
-						<xs:simpleType>
-							<xs:restriction base="xs:string">
-							  <xs:minLength value="0"/>
-							  <xs:maxLength value="20"/>
-							</xs:restriction>
-						</xs:simpleType>
-					</xs:element>
-					<xs:element minOccurs="0" name="ReferencePrise" nillable="true">
-						<xs:simpleType>
-							<xs:restriction base="xs:string">
-							  <xs:minLength value="0"/>
-							  <xs:maxLength value="20"/>
-							</xs:restriction>
-						</xs:simpleType>
-					</xs:element>
-				</xs:sequence>
-			</xs:complexType>
-			<xs:element name="MiseAJourRouteOptiqueDemande" nillable="true" type="tns:MiseAJourRouteOptiqueDemande"/>
-			<xs:complexType name="ReferenceAdresseDemandeType">
-				<xs:sequence>
-					<xs:element minOccurs="0" name="IdentifiantImmeuble" nillable="true" type="xs:string"/>
-					<xs:element minOccurs="0" name="ReferenceGeographique" nillable="true" type="tns:CoordonneesGeographiquesType"/>
-					<xs:element minOccurs="0" name="ReferenceHexacle" nillable="true" type="xs:string"/>
-					<xs:element minOccurs="0" name="ReferenceHexacleVoie" nillable="true" type="tns:ReferenceHexacleVoieType"/>
-					<xs:element minOccurs="0" name="ReferenceRivoli" nillable="true" type="tns:ReferenceRivoliType"/>
-				</xs:sequence>
-			</xs:complexType>
-			<xs:element name="ReferenceAdresseDemandeType" nillable="true" type="tns:ReferenceAdresseDemandeType"/>
-			<xs:complexType name="MiseAJourRouteOptiqueReponse">
-				<xs:sequence>
-					<xs:element name="CodeRetour" nillable="true" type="tns:CodeRetourType"/>
-					<xs:element name="Entete" nillable="true" type="tns:EnteteReponseType"/>
-					<xs:element name="NumeroDecharge" nillable="true">
-						<xs:simpleType>
-							<xs:restriction base="xs:string">
-							  <xs:minLength value="0"/>
-							  <xs:maxLength value="20"/>
-							</xs:restriction>
-						</xs:simpleType>
-					</xs:element>
-					<xs:element name="ReferencePBO" nillable="true">
-						<xs:simpleType>
-							<xs:restriction base="xs:string">
-							  <xs:minLength value="0"/>
-							  <xs:maxLength value="30"/>
-							</xs:restriction>
-						</xs:simpleType>
-					</xs:element>
-					<xs:element name="ReferencePM" nillable="true" type="xs:string"/>
-					<xs:element name="ReferencePMT" nillable="true">
-						<xs:simpleType>
-							<xs:restriction base="xs:string">
-							  <xs:minLength value="0"/>
-							  <xs:maxLength value="20"/>
-							</xs:restriction>
-						</xs:simpleType>
-					</xs:element>
-					<xs:element name="ReferencePrise" nillable="true">
-						<xs:simpleType>
-							<xs:restriction base="xs:string">
-							  <xs:minLength value="0"/>
-							  <xs:maxLength value="30"/>
-							</xs:restriction>
-						</xs:simpleType>
-					</xs:element>
-					<xs:element name="RoutesOptiques" nillable="true" type="tns:ListeRoutesOptiques"/>
-				</xs:sequence>
-			</xs:complexType>
-			<xs:element name="MiseAJourRouteOptiqueReponse" nillable="true" type="tns:MiseAJourRouteOptiqueReponse"/>
-			<xs:complexType name="ListeRoutesOptiques">
-				<xs:sequence>
-					<xs:element minOccurs="0" maxOccurs="4" name="RoutesOptiques" nillable="true" type="tns:RouteOptique"/>
-				</xs:sequence>
-			</xs:complexType>
+<wsdl:definitions
+        xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+        xmlns:tns="http://interop-fibre.fr/Emutation/1.0/"
+        xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+        xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Emutation"
+        targetNamespace="http://interop-fibre.fr/Emutation/1.0/"
+>
+    <wsdl:types>
+        <xsd:schema elementFormDefault="qualified" targetNamespace="http://interop-fibre.fr/Emutation/1.0/"  xmlns:tns="http://interop-fibre.fr/Emutation/1.0/">
+            <xsd:element name="RecherchePBO">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="Entete" nillable="true" type="tns:EnteteRequeteType"/>
+                        <xsd:element minOccurs="0" name="ReferenceCommandePriseInterneOC" nillable="true">
+                            <xsd:simpleType>
+                                <xsd:restriction base="xsd:string">
+                                    <xsd:minLength value="0"/>
+                                    <xsd:maxLength value="20"/>
+                                </xsd:restriction>
+                            </xsd:simpleType>
+                        </xsd:element>
+                        <xsd:element minOccurs="0" name="ReferencePrestationPrise" nillable="true">
+                            <xsd:simpleType>
+                                <xsd:restriction base="xsd:string">
+                                    <xsd:minLength value="0"/>
+                                    <xsd:maxLength value="20"/>
+                                </xsd:restriction>
+                            </xsd:simpleType>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="RecherchePBOResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="CodeRetour" nillable="true" type="tns:CodeRetourType"/>
+                        <xsd:element name="Entete" nillable="true" type="tns:EnteteReponseType"/>
+                        <xsd:element name="ListePBO" nillable="true" type="tns:ListePboType"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="ConsultationFibres">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="Entete" nillable="true" type="tns:EnteteRequeteType"/>
+                        <xsd:element minOccurs="0" name="ReferenceCommandePriseInterneOC" nillable="true">
+                            <xsd:simpleType>
+                                <xsd:restriction base="xsd:string">
+                                    <xsd:minLength value="0"/>
+                                    <xsd:maxLength value="20"/>
+                                </xsd:restriction>
+                            </xsd:simpleType>
+                        </xsd:element>
+                        <xsd:element minOccurs="0" name="ReferencePBO" nillable="true" type="xsd:string"/>
+                        <xsd:element minOccurs="0" name="ReferencePM" nillable="true" type="xsd:string"/>
+                        <xsd:element minOccurs="0" name="ReferencePrestationPrise" nillable="true">
+                            <xsd:simpleType>
+                                <xsd:restriction base="xsd:string">
+                                    <xsd:minLength value="0"/>
+                                    <xsd:maxLength value="20"/>
+                                </xsd:restriction>
+                            </xsd:simpleType>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="ConsultationFibresResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="CodeRetour" nillable="true" type="tns:CodeRetourType"/>
+                        <xsd:element name="Entete" nillable="true" type="tns:EnteteReponseType"/>
+                        <xsd:element name="Fibre" nillable="true" type="tns:ListeFibreType"/>
+                        <xsd:element name="PboType" nillable="true" type="tns:PboType"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="MiseAJourRouteOptique">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="Batiment" nillable="true">
+                            <xsd:simpleType>
+                                <xsd:restriction base="xsd:string">
+                                    <xsd:minLength value="0"/>
+                                    <xsd:maxLength value="60"/>
+                                </xsd:restriction>
+                            </xsd:simpleType>
+                        </xsd:element>
+                        <xsd:element minOccurs="0" name="BatimentTerrain" nillable="true">
+                            <xsd:simpleType>
+                                <xsd:restriction base="xsd:string">
+                                    <xsd:minLength value="0"/>
+                                    <xsd:maxLength value="60"/>
+                                </xsd:restriction>
+                            </xsd:simpleType>
+                        </xsd:element>
+                        <xsd:element name="CodeRetour" nillable="true" type="tns:CodeRetourType"/>
+                        <xsd:element name="Entete" nillable="true" type="tns:EnteteRequeteType"/>
+                        <xsd:element name="Escalier" nillable="true">
+                            <xsd:simpleType>
+                                <xsd:restriction base="xsd:string">
+                                    <xsd:minLength value="0"/>
+                                    <xsd:maxLength value="25"/>
+                                </xsd:restriction>
+                            </xsd:simpleType>
+                        </xsd:element>
+                        <xsd:element minOccurs="0" name="EscalierTerrain" nillable="true">
+                            <xsd:simpleType>
+                                <xsd:restriction base="xsd:string">
+                                    <xsd:minLength value="0"/>
+                                    <xsd:maxLength value="25"/>
+                                </xsd:restriction>
+                            </xsd:simpleType>
+                        </xsd:element>
+                        <xsd:element name="Etage" nillable="true" >
+                            <xsd:simpleType>
+                                <xsd:restriction base="xsd:string">
+                                    <xsd:minLength value="0"/>
+                                    <xsd:maxLength value="25"/>
+                                </xsd:restriction>
+                            </xsd:simpleType>
+                        </xsd:element>
+                        <xsd:element minOccurs="0" name="EtageTerrain" nillable="true">
+                            <xsd:simpleType>
+                                <xsd:restriction base="xsd:string">
+                                    <xsd:minLength value="0"/>
+                                    <xsd:maxLength value="25"/>
+                                </xsd:restriction>
+                            </xsd:simpleType>
+                        </xsd:element>
+                        <xsd:element name="IdentifiantFibre" nillable="true">
+                            <xsd:simpleType>
+                                <xsd:restriction base="xsd:string">
+                                    <xsd:minLength value="0"/>
+                                    <xsd:maxLength value="30"/>
+                                </xsd:restriction>
+                            </xsd:simpleType>
+                        </xsd:element>
+                        <xsd:element name="MotifMutation" nillable="true" type="xsd:string"/>
+                        <xsd:element minOccurs="0" name="PorteTerrain" nillable="true">
+                            <xsd:simpleType>
+                                <xsd:restriction base="xsd:string">
+                                    <xsd:minLength value="0"/>
+                                    <xsd:maxLength value="25"/>
+                                </xsd:restriction>
+                            </xsd:simpleType>
+                        </xsd:element>
+                        <xsd:element name="ReferenceAdresse" nillable="true" type="tns:ReferenceAdresseDemandeType"/>
+                        <xsd:element minOccurs="0" name="ReferenceCommandePriseInterneOC" nillable="true">
+                            <xsd:simpleType>
+                                <xsd:restriction base="xsd:string">
+                                    <xsd:minLength value="0"/>
+                                    <xsd:maxLength value="20"/>
+                                </xsd:restriction>
+                            </xsd:simpleType>
+                        </xsd:element>
+                        <xsd:element minOccurs="0" name="ReferencePrestationPrise" nillable="true">
+                            <xsd:simpleType>
+                                <xsd:restriction base="xsd:string">
+                                    <xsd:minLength value="0"/>
+                                    <xsd:maxLength value="20"/>
+                                </xsd:restriction>
+                            </xsd:simpleType>
+                        </xsd:element>
+                        <xsd:element minOccurs="0" name="ReferencePrise" nillable="true">
+                            <xsd:simpleType>
+                                <xsd:restriction base="xsd:string">
+                                    <xsd:minLength value="0"/>
+                                    <xsd:maxLength value="20"/>
+                                </xsd:restriction>
+                            </xsd:simpleType>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="MiseAJourRouteOptiqueResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="CodeRetour" nillable="true" type="tns:CodeRetourType"/>
+                        <xsd:element name="Entete" nillable="true" type="tns:EnteteReponseType"/>
+                        <xsd:element name="NumeroDecharge" nillable="true">
+                            <xsd:simpleType>
+                                <xsd:restriction base="xsd:string">
+                                    <xsd:minLength value="0"/>
+                                    <xsd:maxLength value="20"/>
+                                </xsd:restriction>
+                            </xsd:simpleType>
+                        </xsd:element>
+                        <xsd:element name="ReferencePBO" nillable="true">
+                            <xsd:simpleType>
+                                <xsd:restriction base="xsd:string">
+                                    <xsd:minLength value="0"/>
+                                    <xsd:maxLength value="30"/>
+                                </xsd:restriction>
+                            </xsd:simpleType>
+                        </xsd:element>
+                        <xsd:element name="ReferencePM" nillable="true" type="xsd:string"/>
+                        <xsd:element name="ReferencePMT" nillable="true">
+                            <xsd:simpleType>
+                                <xsd:restriction base="xsd:string">
+                                    <xsd:minLength value="0"/>
+                                    <xsd:maxLength value="20"/>
+                                </xsd:restriction>
+                            </xsd:simpleType>
+                        </xsd:element>
+                        <xsd:element name="ReferencePrise" nillable="true">
+                            <xsd:simpleType>
+                                <xsd:restriction base="xsd:string">
+                                    <xsd:minLength value="0"/>
+                                    <xsd:maxLength value="30"/>
+                                </xsd:restriction>
+                            </xsd:simpleType>
+                        </xsd:element>
+                        <xsd:element name="RoutesOptiques" nillable="true" type="tns:ListeRoutesOptiques"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
 
-			<xs:complexType name="RouteOptique">
-				<xs:sequence>
-					<xs:element minOccurs="0" name="ConnecteurPriseCouleur" nillable="true" type="xs:string"/>
-					<xs:element name="ConnecteurPriseNumero" type="xs:int"/>
-					<xs:element name="InformationFibrePBO" nillable="true" type="xs:string"/>
-					<xs:element name="InformationTubePBO" nillable="true" type="xs:string"/>
-					<xs:element name="OC" nillable="true" type="xs:string"/>
-					<xs:element name="PositionPm" nillable="true" type="tns:PositionPmType"/>
-					<xs:element minOccurs="0" name="ReferenceCablePBO" nillable="true" type="xs:string"/>
-				</xs:sequence>
-			</xs:complexType>
-			<xs:element name="RouteOptique" nillable="true" type="tns:RouteOptique"/>
-			<xs:complexType name="PositionPmType">
-				<xs:sequence>
-					<xs:element minOccurs="0" name="InfoFibreModulePM" nillable="true" type="xs:string"/>
-					<xs:element minOccurs="0" name="InfoTubeModulePM" nillable="true" type="xs:string"/>
-					<xs:element name="NomModulePM" nillable="true" type="xs:string"/>
-					<xs:element name="PositionModulePM" nillable="true" type="xs:string"/>
-					<xs:element minOccurs="0" name="ReferenceCableModulePM" nillable="true" type="xs:string"/>
-				</xs:sequence>
-			</xs:complexType>
-			<xs:element name="PositionPmType" nillable="true" type="tns:PositionPmType"/>
-		</xs:schema>
-	</wsdl:types>
-	<wsdl:message name="Emutation_RecherchePBO_InputMessage">
-		<wsdl:part name="parameters" element="tns:RecherchePBO"/>
-	</wsdl:message>
-	<wsdl:message name="Emutation_RecherchePBO_OutputMessage">
-		<wsdl:part name="parameters" element="tns:RecherchePBOResponse"/>
-	</wsdl:message>
-	<wsdl:message name="Emutation_ConsultationFibres_InputMessage">
-		<wsdl:part name="parameters" element="tns:ConsultationFibres"/>
-	</wsdl:message>
-	<wsdl:message name="Emutation_ConsultationFibres_OutputMessage">
-		<wsdl:part name="parameters" element="tns:ConsultationFibresResponse"/>
-	</wsdl:message>
-	<wsdl:message name="Emutation_MiseAJourRouteOptique_InputMessage">
-		<wsdl:part name="parameters" element="tns:MiseAJourRouteOptique"/>
-	</wsdl:message>
-	<wsdl:message name="Emutation_MiseAJourRouteOptique_OutputMessage">
-		<wsdl:part name="parameters" element="tns:MiseAJourRouteOptiqueResponse"/>
-	</wsdl:message>
-	<wsdl:portType name="Emutation">
-		
-		<wsdl:operation name="RecherchePBO">
-			<wsdl:input wsaw:Action="http://interop-fibre.fr/Emutation/1.0/RecherchePBO" message="tns:Emutation_RecherchePBO_InputMessage"/>
-			<wsdl:output wsaw:Action="http://interop-fibre.fr/Emutation/1.0/RecherchePBOResponse" message="tns:Emutation_RecherchePBO_OutputMessage"/>
-		</wsdl:operation>
-		<wsdl:operation name="ConsultationFibres">
-			<wsdl:input wsaw:Action="http://interop-fibre.fr/Emutation/1.0/ConsultationFibres" message="tns:Emutation_ConsultationFibres_InputMessage"/>
-			<wsdl:output wsaw:Action="http://interop-fibre.fr/Emutation/1.0/ConsultationFibresResponse" message="tns:Emutation_ConsultationFibres_OutputMessage"/>
-		</wsdl:operation>
-		<wsdl:operation name="MiseAJourRouteOptique">
-			<wsdl:input wsaw:Action="http://interop-fibre.fr/Emutation/1.0/MiseAJourRouteOptique" message="tns:Emutation_MiseAJourRouteOptique_InputMessage"/>
-			<wsdl:output wsaw:Action="http://interop-fibre.fr/Emutation/1.0/MiseAJourRouteOptiqueResponse" message="tns:Emutation_MiseAJourRouteOptique_OutputMessage"/>
-		</wsdl:operation>
-	</wsdl:portType>
-	<wsdl:binding name="BasicHttpBinding_Emutation" type="tns:Emutation">
-		<soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
-		<wsdl:operation name="RecherchePBO">
-			<soap:operation soapAction="http://interop-fibre.fr/Emutation/1.0/RecherchePBO" style="document"/>
-			<wsdl:input>
-				<soap:body use="literal"/>
-			</wsdl:input>
-			<wsdl:output>
-				<soap:body use="literal"/>
-			</wsdl:output>
-		</wsdl:operation>
-		<wsdl:operation name="ConsultationFibres">
-			<soap:operation soapAction="http://interop-fibre.fr/Emutation/1.0/ConsultationFibres" style="document"/>
-			<wsdl:input>
-				<soap:body use="literal"/>
-			</wsdl:input>
-			<wsdl:output>
-				<soap:body use="literal"/>
-			</wsdl:output>
-		</wsdl:operation>
-		<wsdl:operation name="MiseAJourRouteOptique">
-			<soap:operation soapAction="http://interop-fibre.fr/Emutation/1.0/MiseAJourRouteOptique" style="document"/>
-			<wsdl:input>
-				<soap:body use="literal"/>
-			</wsdl:input>
-			<wsdl:output>
-				<soap:body use="literal"/>
-			</wsdl:output>
-		</wsdl:operation>
-	</wsdl:binding>
-	<wsdl:service name="Emutation">
-		<wsdl:port name="BasicHttpBinding_Emutation" binding="tns:BasicHttpBinding_Emutation">
-			<soap:address location="http://interop-fibre.fr/Emutation/1.0/"/>
-		</wsdl:port>
-	</wsdl:service>
+            <xsd:complexType name="EnteteRequeteType">
+                <xsd:sequence>
+                    <xsd:element name="HorodatageRequete" type="xsd:dateTime"/>
+                    <xsd:element name="OperateurCommercial" nillable="true" type="tns:OperateurCommercialType"/>
+                    <xsd:element name="VersionWS" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="EnteteRequeteType" nillable="true" type="tns:EnteteRequeteType"/>
+            <xsd:complexType name="OperateurCommercialType">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="Identifiant" nillable="true" type="xsd:string"/>
+                    <xsd:element name="Nom" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="OperateurCommercialType" nillable="true" type="tns:OperateurCommercialType"/>
+            <xsd:complexType name="CodeRetourType">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="CodeErreur" nillable="true" type="xsd:string"/>
+                    <xsd:element name="CodeRetour" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="LibelleErreur" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="CodeRetourType" nillable="true" type="tns:CodeRetourType"/>
+            <xsd:complexType name="EnteteReponseType">
+                <xsd:sequence>
+                    <xsd:element name="HorodatageReponse" type="xsd:dateTime"/>
+                    <xsd:element name="HorodatageRequete" type="xsd:dateTime"/>
+                    <xsd:element name="IdentifiantReponse" type="xsd:int"/>
+                    <xsd:element name="OperateurCommercial" nillable="true" type="tns:OperateurCommercialType"/>
+                    <xsd:element name="VersionWS" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="EnteteReponseType" nillable="true" type="tns:EnteteReponseType"/>
+            <xsd:complexType name="ListePboType">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" maxOccurs="unbounded" name="Pbo" nillable="true" type="tns:PboType"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="ListePboType" nillable="true" type="tns:ListePboType"/>
+
+            <xsd:complexType name="PboType">
+                <xsd:sequence>
+                    <xsd:element name="AdressePBO" nillable="true" type="tns:AdressePBOReponseType"/>
+                    <xsd:element minOccurs="0" name="NaturePBO" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="NombreFibresDisponibles" type="xsd:int"/>
+                    <xsd:element name="ReferencePBO" nillable="true" type="xsd:string"/>
+                    <xsd:element name="ReferencePM"  nillable="true" type="xsd:string"/>
+                    <xsd:element name="StructurePBO" nillable="true" type="tns:StructureVerticalePBOType"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="PboType" nillable="true" type="tns:PboType"/>
+            <xsd:complexType name="AdressePBOReponseType">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="AdressePBO" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="ReferenceGeographique" nillable="true" type="tns:CoordonneesGeographiquesType"/>
+                    <xsd:element minOccurs="0" name="ReferenceHexacle" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="ReferenceHexacleVoie" nillable="true" type="tns:ReferenceHexacleVoieType"/>
+                    <xsd:element minOccurs="0" name="ReferenceRivoli" nillable="true" type="tns:ReferenceRivoliType"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="AdressePBOReponseType" nillable="true" type="tns:AdressePBOReponseType"/>
+            <xsd:complexType name="CoordonneesGeographiquesType">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="CoordonneesX" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="CoordonneesY" nillable="true" type="xsd:string"/>
+                    <xsd:element name="TypeProjection" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="CoordonneesGeographiquesType" nillable="true" type="tns:CoordonneesGeographiquesType"/>
+            <xsd:complexType name="ReferenceHexacleVoieType">
+                <xsd:sequence>
+                    <xsd:element name="CodeHexacleVoie"  nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="ComplementNumeroVoie" type="xsd:string"/>
+                    <xsd:element name="NumeroVoie" type="xsd:nonNegativeInteger"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="ReferenceHexacleVoieType" nillable="true" type="tns:ReferenceHexacleVoieType"/>
+            <xsd:complexType name="ReferenceRivoliType">
+                <xsd:sequence>
+                    <xsd:element name="CodeInsee"  nillable="true" type="xsd:string"/>
+                    <xsd:element name="CodeRivoli"  nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="ComplementNumeroVoie" type="xsd:string" />
+                    <xsd:element name="NumeroVoie" type="xsd:nonNegativeInteger"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="ReferenceRivoliType" nillable="true" type="tns:ReferenceRivoliType"/>
+            <xsd:complexType name="StructureVerticalePBOType">
+                <xsd:sequence>
+                    <xsd:element name="Batiment" nillable="true" type="xsd:string"/>
+                    <xsd:element name="Escalier" nillable="true" type="xsd:string"/>
+                    <xsd:element name="Etage" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="StructureVerticalePBOType" nillable="true" type="tns:StructureVerticalePBOType"/>
+            <xsd:complexType name="ListeFibreType">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" maxOccurs="unbounded" name="Fibres" nillable="true" type="tns:FibreType"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="FibreType">
+                <xsd:sequence>
+                    <xsd:element name="EtatFibre" nillable="true" type="tns:EtatFibreType"/>
+                    <xsd:element name="IdentifiantFibre" nillable="true" type="xsd:string"/>
+                    <xsd:element name="InformationFibrePBO" nillable="true" type="xsd:string"/>
+                    <xsd:element name="InformationTubePBO" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="ReferenceCablePBO" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="ReferencePrise" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="FibreType" nillable="true" type="tns:FibreType"/>
+            <xsd:simpleType name="EtatFibreType">
+                <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="fibre disponible"/>
+                    <xsd:enumeration value="fibre dédiée disponible"/>
+                    <xsd:enumeration value="fibre réservée"/>
+                    <xsd:enumeration value="fibre occupée"/>
+                    <xsd:enumeration value="fibre hors service"/>
+                </xsd:restriction>
+            </xsd:simpleType>
+
+            <xsd:complexType name="ReferenceAdresseDemandeType">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="IdentifiantImmeuble" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="ReferenceGeographique" nillable="true" type="tns:CoordonneesGeographiquesType"/>
+                    <xsd:element minOccurs="0" name="ReferenceHexacle" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="ReferenceHexacleVoie" nillable="true" type="tns:ReferenceHexacleVoieType"/>
+                    <xsd:element minOccurs="0" name="ReferenceRivoli" nillable="true" type="tns:ReferenceRivoliType"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="ReferenceAdresseDemandeType" nillable="true" type="tns:ReferenceAdresseDemandeType"/>
+
+            <xsd:complexType name="ListeRoutesOptiques">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" maxOccurs="4" name="RoutesOptiques" nillable="true" type="tns:RouteOptique"/>
+                </xsd:sequence>
+            </xsd:complexType>
+
+            <xsd:complexType name="RouteOptique">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="ConnecteurPriseCouleur" nillable="true" type="xsd:string"/>
+                    <xsd:element name="ConnecteurPriseNumero" type="xsd:int"/>
+                    <xsd:element name="InformationFibrePBO" nillable="true" type="xsd:string"/>
+                    <xsd:element name="InformationTubePBO" nillable="true" type="xsd:string"/>
+                    <xsd:element name="OC" nillable="true" type="xsd:string"/>
+                    <xsd:element name="PositionPm" nillable="true" type="tns:PositionPmType"/>
+                    <xsd:element minOccurs="0" name="ReferenceCablePBO" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="RouteOptique" nillable="true" type="tns:RouteOptique"/>
+            <xsd:complexType name="PositionPmType">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="InfoFibreModulePM" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="InfoTubeModulePM" nillable="true" type="xsd:string"/>
+                    <xsd:element name="NomModulePM" nillable="true" type="xsd:string"/>
+                    <xsd:element name="PositionModulePM" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="ReferenceCableModulePM" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="PositionPmType" nillable="true" type="tns:PositionPmType"/>
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="Emutation_RecherchePBO_InputMessage">
+        <wsdl:part name="request" element="tns:RecherchePBO"/>
+    </wsdl:message>
+    <wsdl:message name="Emutation_RecherchePBO_OutputMessage">
+        <wsdl:part name="response" element="tns:RecherchePBOResponse"/>
+    </wsdl:message>
+    <wsdl:message name="Emutation_ConsultationFibres_InputMessage">
+        <wsdl:part name="request" element="tns:ConsultationFibres"/>
+    </wsdl:message>
+    <wsdl:message name="Emutation_ConsultationFibres_OutputMessage">
+        <wsdl:part name="response" element="tns:ConsultationFibresResponse"/>
+    </wsdl:message>
+    <wsdl:message name="Emutation_MiseAJourRouteOptique_InputMessage">
+        <wsdl:part name="request" element="tns:MiseAJourRouteOptique"/>
+    </wsdl:message>
+    <wsdl:message name="Emutation_MiseAJourRouteOptique_OutputMessage">
+        <wsdl:part name="response" element="tns:MiseAJourRouteOptiqueResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="Emutation">
+
+        <wsdl:operation name="RecherchePBO">
+            <wsdl:input message="tns:Emutation_RecherchePBO_InputMessage"/>
+            <wsdl:output message="tns:Emutation_RecherchePBO_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="ConsultationFibres">
+            <wsdl:input message="tns:Emutation_ConsultationFibres_InputMessage"/>
+            <wsdl:output message="tns:Emutation_ConsultationFibres_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="MiseAJourRouteOptique">
+            <wsdl:input message="tns:Emutation_MiseAJourRouteOptique_InputMessage"/>
+            <wsdl:output message="tns:Emutation_MiseAJourRouteOptique_OutputMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="BasicHttpBinding_Emutation" type="tns:Emutation">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="RecherchePBO">
+            <soap:operation soapAction="http://interop-fibre.fr/Emutation/1.0/RecherchePBO" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="ConsultationFibres">
+            <soap:operation soapAction="http://interop-fibre.fr/Emutation/1.0/ConsultationFibres" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="MiseAJourRouteOptique">
+            <soap:operation soapAction="http://interop-fibre.fr/Emutation/1.0/MiseAJourRouteOptique" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="Emutation">
+        <wsdl:port name="BasicHttpBinding_Emutation" binding="tns:BasicHttpBinding_Emutation">
+            <soap:address location="http://interop-fibre.fr/Emutation/1.0/Emutation"/>
+        </wsdl:port>
+    </wsdl:service>
 </wsdl:definitions>
