@@ -55,6 +55,9 @@
                                 <wsdlOptions>
                                     <wsdlOption>
                                         <wsdl>${basedir}/src/main/resources/emutation.wsdl</wsdl>
+                                        <bindingFiles>
+                                            <bindingFile>${basedir}/binding.xml</bindingFile>
+                                        </bindingFiles>
                                     </wsdlOption>
                                 </wsdlOptions>
                             </configuration>
