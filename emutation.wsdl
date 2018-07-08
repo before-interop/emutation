@@ -95,14 +95,6 @@
                     <xsd:maxLength value="20"/>
                 </xsd:restriction>
             </xsd:simpleType>
-            <xsd:simpleType name="CodeRetourEnumType">
-                <xsd:restriction base="xsd:int">
-                    <xsd:enumeration value="0"/>
-                    <xsd:enumeration value="1"/>
-                    <xsd:enumeration value="2"/>
-                    <xsd:enumeration value="3"/>
-                </xsd:restriction>
-            </xsd:simpleType>
             <xsd:simpleType name="NaturePBOType">
                 <xsd:restriction base="xsd:string">
                     <xsd:minLength value="0"/>
@@ -188,6 +180,98 @@
                 </xsd:restriction>
             </xsd:simpleType>
 
+            <xsd:simpleType name="TechnicalFaultCodeErreur">
+                <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="S01"/>
+                </xsd:restriction>
+            </xsd:simpleType>
+            <xsd:simpleType name="FunctionalFaultCodeErreur">
+                <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="S02"/>
+                    <xsd:enumeration value="C03"/>
+                </xsd:restriction>
+            </xsd:simpleType>
+            <xsd:simpleType name="ConsultationFibresFaultCodeErreur">
+                <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="I02"/>
+                </xsd:restriction>
+            </xsd:simpleType>
+            <xsd:simpleType name="MiseAJourRouteOptiqueFaultCodeErreur">
+                <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="S03"/>
+                    <xsd:enumeration value="C01"/>
+                    <xsd:enumeration value="I03"/>
+                </xsd:restriction>
+            </xsd:simpleType>
+
+            <xsd:simpleType name="TechnicalFaultLibelleErreur">
+                <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="Erreur serveur"/>
+                </xsd:restriction>
+            </xsd:simpleType>
+            <xsd:simpleType name="FunctionalFaultLibelleErreur">
+                <xsd:restriction base="xsd:string">
+                    <xsd:enumeration
+                            value="Recherche ou mutation impossible, pas d'accès livré ni en cours de livraison pour cette référence"/>
+                    <xsd:enumeration
+                            value="Mutation impossible, commande n’est pas dans un état autorisant la mutation (par exemple cas d’une commande annulée)"/>
+                </xsd:restriction>
+            </xsd:simpleType>
+            <xsd:simpleType name="ConsultationFibresFaultLibelleErreur">
+                <xsd:restriction base="xsd:string">
+                    <xsd:enumeration
+                            value="Identifiant PBO (couple ReferencePM/ReferencePBO introuvable ou manquant"/>
+                </xsd:restriction>
+            </xsd:simpleType>
+            <xsd:simpleType name="MiseAJourRouteOptiqueFaultLibelleErreur">
+                <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="Mutation impossible, identifiant de fibre inconnue"/>
+                    <xsd:enumeration value="Adresse inexistante dans le référentiel de l’OI"/>
+                    <xsd:enumeration value="Motif de mutation inexistant ou incohérent"/>
+                </xsd:restriction>
+            </xsd:simpleType>
+
+            <xsd:element name="TechnicalFault">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" name="CodeErreur" type="tns:TechnicalFaultCodeErreur"/>
+                        <xsd:element minOccurs="1" name="LibelleErreur" type="tns:TechnicalFaultLibelleErreur"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="FunctionalFault">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" name="CodeErreur" type="tns:FunctionalFaultCodeErreur"/>
+                        <xsd:element minOccurs="1" name="LibelleErreur" type="tns:FunctionalFaultLibelleErreur"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="DefaultFault">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" name="CodeErreur" type="xsd:string"/>
+                        <xsd:element minOccurs="1" name="LibelleErreur" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="ConsultationFibresFault">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" name="CodeErreur" type="tns:ConsultationFibresFaultCodeErreur"/>
+                        <xsd:element minOccurs="1" name="LibelleErreur" type="tns:ConsultationFibresFaultLibelleErreur"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="MiseAJourRouteOptiqueFault">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" name="CodeErreur" type="tns:MiseAJourRouteOptiqueFaultCodeErreur"/>
+                        <xsd:element minOccurs="1" name="LibelleErreur" type="tns:MiseAJourRouteOptiqueFaultLibelleErreur"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+
             <xsd:element name="RecherchePBO">
                 <xsd:complexType>
                     <xsd:sequence>
@@ -200,7 +284,6 @@
             <xsd:element name="RecherchePBOResponse">
                 <xsd:complexType>
                     <xsd:sequence>
-                        <xsd:element name="CodeRetour" type="tns:CodeRetourType"/>
                         <xsd:element name="Entete" type="tns:EnteteReponseType"/>
                         <xsd:element name="ListePBO" type="tns:ListePboType"/>
                     </xsd:sequence>
@@ -221,7 +304,6 @@
                 <xsd:complexType>
                     <xsd:sequence>
                         <xsd:element name="Entete" type="tns:EnteteReponseType"/>
-                        <xsd:element name="CodeRetour" type="tns:CodeRetourType"/>
                         <xsd:element name="PboType" type="tns:PboType"/>
                         <xsd:element name="Fibres" type="tns:ListeFibresType"/>
                     </xsd:sequence>
@@ -251,7 +333,6 @@
                 <xsd:complexType>
                     <xsd:sequence>
                         <xsd:element name="Entete" type="tns:EnteteReponseType"/>
-                        <xsd:element name="CodeRetour" type="tns:CodeRetourType"/>
                         <xsd:element name="NumeroDecharge" type="tns:NumeroDechargeType"/>
                         <xsd:element name="RoutesOptiques" type="tns:ListeRoutesOptiques"/>
                         <xsd:element name="ReferencePrise" type="tns:ReferencePriseType"/>
@@ -273,13 +354,6 @@
                 <xsd:sequence>
                     <xsd:element name="Nom" type="xsd:string"/>
                     <xsd:element minOccurs="0" name="Identifiant" type="xsd:string"/>
-                </xsd:sequence>
-            </xsd:complexType>
-            <xsd:complexType name="CodeRetourType">
-                <xsd:sequence>
-                    <xsd:element name="CodeRetour" type="tns:CodeRetourEnumType"/>
-                    <xsd:element minOccurs="0" name="CodeErreur" type="xsd:string"/>
-                    <xsd:element minOccurs="0" name="LibelleErreur" type="xsd:string"/>
                 </xsd:sequence>
             </xsd:complexType>
             <xsd:complexType name="EnteteReponseType">
@@ -378,36 +452,67 @@
             </xsd:complexType>
         </xsd:schema>
     </wsdl:types>
+
+    <wsdl:message name="Emutation_TechnicalFaultMessage">
+        <wsdl:part name="fault" element="tns:TechnicalFault" />
+    </wsdl:message>
+    <wsdl:message name="Emutation_FunctionalFaultMessage">
+        <wsdl:part name="fault" element="tns:FunctionalFault" />
+    </wsdl:message>
+    <wsdl:message name="Emutation_DefaultFaultMessage">
+        <wsdl:part name="fault" element="tns:DefaultFault" />
+    </wsdl:message>
+
     <wsdl:message name="Emutation_RecherchePBO_InputMessage">
         <wsdl:part name="request" element="tns:RecherchePBO"/>
     </wsdl:message>
     <wsdl:message name="Emutation_RecherchePBO_OutputMessage">
         <wsdl:part name="response" element="tns:RecherchePBOResponse"/>
     </wsdl:message>
+
     <wsdl:message name="Emutation_ConsultationFibres_InputMessage">
         <wsdl:part name="request" element="tns:ConsultationFibres"/>
     </wsdl:message>
     <wsdl:message name="Emutation_ConsultationFibres_OutputMessage">
         <wsdl:part name="response" element="tns:ConsultationFibresResponse"/>
     </wsdl:message>
+    <wsdl:message name="Emutation_ConsultationFibresFaultMessage">
+        <wsdl:part name="fault" element="tns:ConsultationFibresFault" />
+    </wsdl:message>
+
     <wsdl:message name="Emutation_MiseAJourRouteOptique_InputMessage">
         <wsdl:part name="request" element="tns:MiseAJourRouteOptique"/>
     </wsdl:message>
     <wsdl:message name="Emutation_MiseAJourRouteOptique_OutputMessage">
         <wsdl:part name="response" element="tns:MiseAJourRouteOptiqueResponse"/>
     </wsdl:message>
+    <wsdl:message name="Emutation_MiseAJourRouteOptiqueFaultMessage">
+        <wsdl:part name="fault" element="tns:MiseAJourRouteOptiqueFault" />
+    </wsdl:message>
+
     <wsdl:portType name="Emutation">
         <wsdl:operation name="RecherchePBO">
             <wsdl:input message="tns:Emutation_RecherchePBO_InputMessage"/>
             <wsdl:output message="tns:Emutation_RecherchePBO_OutputMessage"/>
+            <wsdl:fault name="technicalFault" message="tns:Emutation_TechnicalFaultMessage"/>
+            <wsdl:fault name="functionalFault" message="tns:Emutation_FunctionalFaultMessage"/>
+            <wsdl:fault name="defaultFault" message="tns:Emutation_DefaultFaultMessage"/>
         </wsdl:operation>
         <wsdl:operation name="ConsultationFibres">
             <wsdl:input message="tns:Emutation_ConsultationFibres_InputMessage"/>
             <wsdl:output message="tns:Emutation_ConsultationFibres_OutputMessage"/>
+            <wsdl:fault name="technicalFault" message="tns:Emutation_TechnicalFaultMessage"/>
+            <wsdl:fault name="functionalFault" message="tns:Emutation_FunctionalFaultMessage"/>
+            <wsdl:fault name="consultationFibresFault" message="tns:Emutation_ConsultationFibresFaultMessage"/>
+            <wsdl:fault name="defaultFault" message="tns:Emutation_DefaultFaultMessage"/>
         </wsdl:operation>
         <wsdl:operation name="MiseAJourRouteOptique">
             <wsdl:input message="tns:Emutation_MiseAJourRouteOptique_InputMessage"/>
             <wsdl:output message="tns:Emutation_MiseAJourRouteOptique_OutputMessage"/>
+            <wsdl:fault name="technicalFault" message="tns:Emutation_TechnicalFaultMessage"/>
+            <wsdl:fault name="functionalFault" message="tns:Emutation_FunctionalFaultMessage"/>
+            <wsdl:fault name="miseAJourFault" message="tns:Emutation_MiseAJourRouteOptiqueFaultMessage"/>
+            <wsdl:fault name="defaultFault" message="tns:Emutation_DefaultFaultMessage"/>
         </wsdl:operation>
     </wsdl:portType>
     <wsdl:binding name="BasicHttpBinding_Emutation" type="tns:Emutation">
@@ -420,6 +525,15 @@
             <wsdl:output>
                 <soap:body use="literal"/>
             </wsdl:output>
+            <wsdl:fault name="technicalFault">
+                <soap:fault name="technicalFault" use="literal"/>
+            </wsdl:fault>
+            <wsdl:fault name="functionalFault">
+                <soap:fault name="functionalFault" use="literal"/>
+            </wsdl:fault>
+            <wsdl:fault name="defaultFault">
+                <soap:fault name="defaultFault" use="literal"/>
+            </wsdl:fault>
         </wsdl:operation>
         <wsdl:operation name="ConsultationFibres">
             <soap:operation soapAction="http://interop-fibre.fr/Emutation/1.0/ConsultationFibres" style="document"/>
@@ -429,6 +543,18 @@
             <wsdl:output>
                 <soap:body use="literal"/>
             </wsdl:output>
+            <wsdl:fault name="technicalFault">
+                <soap:fault name="technicalFault" use="literal"/>
+            </wsdl:fault>
+            <wsdl:fault name="functionalFault">
+                <soap:fault name="functionalFault" use="literal"/>
+            </wsdl:fault>
+            <wsdl:fault name="defaultFault">
+                <soap:fault name="defaultFault" use="literal"/>
+            </wsdl:fault>
+            <wsdl:fault name="consultationFibresFault">
+                <soap:fault name="consultationFibresFault" use="literal"/>
+            </wsdl:fault>
         </wsdl:operation>
         <wsdl:operation name="MiseAJourRouteOptique">
             <soap:operation soapAction="http://interop-fibre.fr/Emutation/1.0/MiseAJourRouteOptique" style="document"/>
@@ -438,6 +564,18 @@
             <wsdl:output>
                 <soap:body use="literal"/>
             </wsdl:output>
+            <wsdl:fault name="technicalFault">
+                <soap:fault name="technicalFault" use="literal"/>
+            </wsdl:fault>
+            <wsdl:fault name="functionalFault">
+                <soap:fault name="functionalFault" use="literal"/>
+            </wsdl:fault>
+            <wsdl:fault name="defaultFault">
+                <soap:fault name="defaultFault" use="literal"/>
+            </wsdl:fault>
+            <wsdl:fault name="miseAJourFault">
+                <soap:fault name="miseAJourFault" use="literal"/>
+            </wsdl:fault>
         </wsdl:operation>
     </wsdl:binding>
     <wsdl:service name="Emutation">
