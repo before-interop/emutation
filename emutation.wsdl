@@ -59,9 +59,10 @@
                     <xsd:enumeration value="Bâtiment client erroné"/>
                     <xsd:enumeration value="Escalier client erroné"/>
                     <xsd:enumeration value="Etage client erroné"/>
-                    <xsd:enumeration value="PTO existante alors que PTO à construire à la commande OC"/>
-                    <xsd:enumeration value="PTO à construire alors que PTO existante à la commande OC"/>
+                    <xsd:enumeration value="PTO existante alors que PTO à construire dans la commande OC"/>
+                    <xsd:enumeration value="PTO à construire alors que PTO existante dans la commande OC"/>
                     <xsd:enumeration value="Référence PTO erronée"/>
+                    <xsd:enumeration value="Commande HOTLINE"/>
                 </xsd:restriction>
             </xsd:simpleType>
             <xsd:simpleType name="BatimentType">
@@ -112,12 +113,6 @@
                 <xsd:restriction base="xsd:string">
                     <xsd:minLength value="0"/>
                     <xsd:maxLength value="10"/>
-                </xsd:restriction>
-            </xsd:simpleType>
-            <xsd:simpleType name="AdressePBOType">
-                <xsd:restriction base="xsd:string">
-                    <xsd:minLength value="0"/>
-                    <xsd:maxLength value="50"/>
                 </xsd:restriction>
             </xsd:simpleType>
             <xsd:simpleType name="TypeProjectionType">
@@ -186,6 +181,12 @@
                     <xsd:maxLength value="30"/>
                 </xsd:restriction>
             </xsd:simpleType>
+            <xsd:simpleType name="LocalisationPBOType">
+                <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="2048"/>
+                </xsd:restriction>
+            </xsd:simpleType>
 
             <xsd:element name="RecherchePBO">
                 <xsd:complexType>
@@ -222,7 +223,7 @@
                         <xsd:element name="Entete" type="tns:EnteteReponseType"/>
                         <xsd:element name="CodeRetour" type="tns:CodeRetourType"/>
                         <xsd:element name="PboType" type="tns:PboType"/>
-                        <xsd:element name="Fibre" type="tns:ListeFibreType"/>
+                        <xsd:element name="Fibres" type="tns:ListeFibresType"/>
                     </xsd:sequence>
                 </xsd:complexType>
             </xsd:element>
@@ -234,10 +235,10 @@
                         <xsd:element minOccurs="0" name="ReferencePrestationPrise" type="tns:ReferencePrestationPriseType"/>
                         <xsd:element name="IdentifiantFibre" type="tns:IdentifiantFibreType"/>
                         <xsd:element name="MotifMutation" type="tns:MotifMutationType"/>
-                        <xsd:element name="ReferenceAdresse" type="tns:ReferenceAdresseDemandeType"/>
-                        <xsd:element name="Batiment" type="tns:BatimentType"/>
-                        <xsd:element name="Escalier" type="tns:EscalierType"/>
-                        <xsd:element name="Etage" type="tns:EtageType"/>
+                        <xsd:element minOccurs="0" name="ReferenceAdresse" type="tns:ReferenceAdresseDemandeType"/>
+                        <xsd:element minOccurs="0" name="Batiment" type="tns:BatimentType"/>
+                        <xsd:element minOccurs="0" name="Escalier" type="tns:EscalierType"/>
+                        <xsd:element minOccurs="0" name="Etage" type="tns:EtageType"/>
                         <xsd:element minOccurs="0" name="ReferencePrise" type="tns:ReferencePriseType"/>
                         <xsd:element minOccurs="0" name="BatimentTerrain" type="tns:BatimentType"/>
                         <xsd:element minOccurs="0" name="EscalierTerrain" type="tns:EscalierType"/>
@@ -299,20 +300,11 @@
                 <xsd:sequence>
                     <xsd:element name="ReferencePM"  type="tns:ReferencePMType"/>
                     <xsd:element name="ReferencePBO" type="tns:ReferencePBOType"/>
-                    <xsd:element name="AdressePBO" type="tns:AdressePBOReponseType"/>
+                    <xsd:element name="LocalisationPBO" type="tns:LocalisationPBOType"/>
                     <xsd:element name="StructurePBO" type="tns:StructureVerticalePBOType"/>
                     <xsd:element minOccurs="0" name="NombreFibresDisponibles" type="xsd:int"/>
                     <xsd:element minOccurs="0" name="NaturePBO"  type="tns:NaturePBOType"/>
                 </xsd:sequence>
-            </xsd:complexType>
-            <xsd:complexType name="AdressePBOReponseType">
-                <xsd:choice>
-                    <xsd:element minOccurs="0" name="ReferenceHexacle" type="tns:ReferenceHexacleType"/>
-                    <xsd:element minOccurs="0" name="ReferenceRivoli" type="tns:ReferenceRivoliType"/>
-                    <xsd:element minOccurs="0" name="ReferenceHexacleVoie" type="tns:ReferenceHexacleVoieType"/>
-                    <xsd:element minOccurs="0" name="ReferenceGeographique" type="tns:CoordonneesGeographiquesType"/>
-                    <xsd:element minOccurs="0" name="AdressePBO" type="tns:AdressePBOType"/>
-                </xsd:choice>
             </xsd:complexType>
             <xsd:complexType name="CoordonneesGeographiquesType">
                 <xsd:sequence>
@@ -343,9 +335,9 @@
                     <xsd:element name="Etage" type="tns:EtageType"/>
                 </xsd:sequence>
             </xsd:complexType>
-            <xsd:complexType name="ListeFibreType">
+            <xsd:complexType name="ListeFibresType">
                 <xsd:sequence>
-                    <xsd:element minOccurs="0" maxOccurs="unbounded" name="Fibres" type="tns:FibreType"/>
+                    <xsd:element minOccurs="0" maxOccurs="unbounded" name="Fibre" type="tns:FibreType"/>
                 </xsd:sequence>
             </xsd:complexType>
             <xsd:complexType name="FibreType">
@@ -359,13 +351,13 @@
                 </xsd:sequence>
             </xsd:complexType>
             <xsd:complexType name="ReferenceAdresseDemandeType">
-                <xsd:choice>
+                <xsd:sequence>
                     <xsd:element minOccurs="0" name="ReferenceHexacle" type="tns:ReferenceHexacleType"/>
                     <xsd:element minOccurs="0" name="ReferenceRivoli" type="tns:ReferenceRivoliType"/>
                     <xsd:element minOccurs="0" name="ReferenceGeographique" type="tns:CoordonneesGeographiquesType"/>
                     <xsd:element minOccurs="0" name="ReferenceHexacleVoie" type="tns:ReferenceHexacleVoieType"/>
                     <xsd:element minOccurs="0" name="IdentifiantImmeuble" type="tns:IdentifiantImmeubleType"/>
-                </xsd:choice>
+                </xsd:sequence>
             </xsd:complexType>
             <xsd:complexType name="ListeRoutesOptiques">
                 <xsd:sequence>
