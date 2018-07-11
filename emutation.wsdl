@@ -301,7 +301,6 @@
                     <xsd:element name="ReferencePM"  type="tns:ReferencePMType"/>
                     <xsd:element name="ReferencePBO" type="tns:ReferencePBOType"/>
                     <xsd:element name="LocalisationPBO" type="tns:LocalisationPBOType"/>
-                    <xsd:element name="StructurePBO" type="tns:StructureVerticalePBOType"/>
                     <xsd:element minOccurs="0" name="NombreFibresDisponibles" type="xsd:int"/>
                     <xsd:element minOccurs="0" name="NaturePBO"  type="tns:NaturePBOType"/>
                 </xsd:sequence>
@@ -326,13 +325,6 @@
                     <xsd:element name="CodeRivoli"  type="tns:CodeRivoliType"/>
                     <xsd:element name="NumeroVoie" type="xsd:nonNegativeInteger"/>
                     <xsd:element minOccurs="0" name="ComplementNumeroVoie" type="tns:ComplementNumeroVoieType" />
-                </xsd:sequence>
-            </xsd:complexType>
-            <xsd:complexType name="StructureVerticalePBOType">
-                <xsd:sequence>
-                    <xsd:element name="Batiment" type="tns:BatimentType"/>
-                    <xsd:element name="Escalier" type="tns:EscalierType"/>
-                    <xsd:element name="Etage" type="tns:EtageType"/>
                 </xsd:sequence>
             </xsd:complexType>
             <xsd:complexType name="ListeFibresType">
