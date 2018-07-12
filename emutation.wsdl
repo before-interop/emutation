@@ -194,6 +194,8 @@
                         <xsd:element name="Entete" type="tns:EnteteRequeteType"/>
                         <xsd:element minOccurs="0" name="ReferenceCommandePriseInterneOC" type="tns:ReferenceCommandePriseInterneOCType"/>
                         <xsd:element minOccurs="0" name="ReferencePrestationPrise" type="tns:ReferencePrestationPriseType"/>
+                        <xsd:element minOccurs="0" name="offset" type="xsd:int"/>
+                        <xsd:element minOccurs="0" name="limit" type="xsd:int"/>
                     </xsd:sequence>
                 </xsd:complexType>
             </xsd:element>
@@ -214,6 +216,8 @@
                         <xsd:element minOccurs="0" name="ReferencePBO" type="tns:ReferencePBOType"/>
                         <xsd:element minOccurs="0" name="ReferenceCommandePriseInterneOC" type="tns:ReferenceCommandePriseInterneOCType"/>
                         <xsd:element minOccurs="0" name="ReferencePrestationPrise" type="tns:ReferencePrestationPriseType"/>
+                        <xsd:element minOccurs="0" name="offset" type="xsd:int"/>
+                        <xsd:element minOccurs="0" name="limit" type="xsd:int"/>
                     </xsd:sequence>
                 </xsd:complexType>
             </xsd:element>
