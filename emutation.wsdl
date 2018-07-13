@@ -187,6 +187,11 @@
                     <xsd:maxLength value="2048"/>
                 </xsd:restriction>
             </xsd:simpleType>
+            <xsd:simpleType name="UUID">
+                <xsd:restriction base="xsd:string">
+                    <xsd:pattern value="(urn:uuid:)?[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}|\{[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}\}" />
+                </xsd:restriction>
+            </xsd:simpleType>
 
             <xsd:element name="RecherchePBO">
                 <xsd:complexType>
@@ -267,6 +272,7 @@
                     <xsd:element name="VersionWS" type="xsd:string"/>
                     <xsd:element name="HorodatageRequete" type="xsd:dateTime"/>
                     <xsd:element name="OperateurCommercial" type="tns:OperateurCommercialType"/>
+                    <xsd:element name="IdentifiantRequete" type="tns:UUID"/>
                 </xsd:sequence>
             </xsd:complexType>
             <xsd:complexType name="OperateurCommercialType">
@@ -287,8 +293,8 @@
                     <xsd:element name="VersionWS"  type="xsd:string"/>
                     <xsd:element name="HorodatageReponse" type="xsd:dateTime"/>
                     <xsd:element name="HorodatageRequete" type="xsd:dateTime"/>
-                    <xsd:element name="OperateurCommercial"  type="tns:OperateurCommercialType"/>
-                    <xsd:element name="IdentifiantReponse" type="xsd:int"/>
+                    <xsd:element name="OperateurCommercial" type="tns:OperateurCommercialType"/>
+                    <xsd:element name="IdentifiantReponse" type="tns:UUID"/>
                 </xsd:sequence>
             </xsd:complexType>
             <xsd:complexType name="ListePboType">
