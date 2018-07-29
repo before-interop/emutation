@@ -193,19 +193,18 @@
             <xsd:simpleType name="FunctionalFaultCodeErreur">
                 <xsd:restriction base="xsd:string">
                     <xsd:enumeration value="S02"/>
-                    <xsd:enumeration value="C03"/>
                 </xsd:restriction>
             </xsd:simpleType>
             <xsd:simpleType name="ConsultationFibresFaultCodeErreur">
                 <xsd:restriction base="xsd:string">
-                    <xsd:enumeration value="I02"/>
+                    <xsd:enumeration value="I01"/>
                 </xsd:restriction>
             </xsd:simpleType>
             <xsd:simpleType name="MiseAJourRouteOptiqueFaultCodeErreur">
                 <xsd:restriction base="xsd:string">
                     <xsd:enumeration value="S03"/>
                     <xsd:enumeration value="C01"/>
-                    <xsd:enumeration value="I03"/>
+                    <xsd:enumeration value="C03"/>
                 </xsd:restriction>
             </xsd:simpleType>
 
@@ -218,21 +217,19 @@
                 <xsd:restriction base="xsd:string">
                     <xsd:enumeration
                             value="Recherche ou mutation impossible, pas d'accès livré ni en cours de livraison pour cette référence"/>
-                    <xsd:enumeration
-                            value="Mutation impossible, commande n’est pas dans un état autorisant la mutation (par exemple cas d’une commande annulée)"/>
                 </xsd:restriction>
             </xsd:simpleType>
             <xsd:simpleType name="ConsultationFibresFaultLibelleErreur">
                 <xsd:restriction base="xsd:string">
                     <xsd:enumeration
-                            value="Identifiant PBO (couple ReferencePM/ReferencePBO introuvable ou manquant"/>
+                            value="Identifiant PBO (couple ReferencePM/ReferencePBO introuvable)"/>
                 </xsd:restriction>
             </xsd:simpleType>
             <xsd:simpleType name="MiseAJourRouteOptiqueFaultLibelleErreur">
                 <xsd:restriction base="xsd:string">
                     <xsd:enumeration value="Mutation impossible, identifiant de fibre inconnue"/>
                     <xsd:enumeration value="Adresse inexistante dans le référentiel de l’OI"/>
-                    <xsd:enumeration value="Motif de mutation inexistant ou incohérent"/>
+                    <xsd:enumeration value="Mutation impossible, la commande n’est pas dans un état autorisant la mutation (par exemple cas d’une commande annulée)"/>
                 </xsd:restriction>
             </xsd:simpleType>
 
