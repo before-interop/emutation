@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.axione.app</groupId>
+    <artifactId>emutation</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <cxf.version>3.2.0</cxf.version>
+        <resources-plugin.version>3.1.0</resources-plugin.version>
+    </properties>
+
+      <build>
+            <plugins>
+                <!-- copy emutation wsdl file from root path -->
+                <plugin>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>${resources-plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <id>copy-resources</id>
+                            <phase>validate</phase>
+                            <goals>
+                                <goal>copy-resources</goal>
+                            </goals>
+                            <configuration>
+                                <outputDirectory>${basedir}/src/main/resources</outputDirectory>
+                                <resources>
+                                    <resource>
+                                        <directory>${basedir}/../</directory>
+                                        <filtering>true</filtering>
+                                        <includes>
+                                            <include>*.wsdl</include>
+                                        </includes>
+                                    </resource>
+                                </resources>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <!-- generate java source code from wsdl -->
+                    <groupId>org.apache.cxf</groupId>
+                    <artifactId>cxf-codegen-plugin</artifactId>
+                    <version>${cxf.version}</version>
+                    <executions>
+                        <execution>
+                            <id>generate-sources</id>
+                            <phase>generate-sources</phase>
+                            <configuration>
+                                <sourceRoot>${project.build.directory}/generated/cxf</sourceRoot>
+                                <wsdlOptions>
+                                    <wsdlOption>
+                                        <wsdl>${basedir}/src/main/resources/emutation.wsdl</wsdl>
+                                        <bindingFiles>
+                                            <bindingFile>${basedir}/binding.xml</bindingFile>
+                                        </bindingFiles>
+                                    </wsdlOption>
+                                </wsdlOptions>
+                            </configuration>
+                            <goals>
+                                <goal>wsdl2java</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+      </build>
+
+
+
+</project>
