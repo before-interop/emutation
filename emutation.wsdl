@@ -11,13 +11,13 @@
             <xsd:simpleType name="ReferenceCommandePriseInterneOCType">
                 <xsd:restriction base="xsd:string">
                     <xsd:minLength value="0"/>
-                    <xsd:maxLength value="20"/>
+                    <xsd:maxLength value="30"/>
                 </xsd:restriction>
             </xsd:simpleType>
             <xsd:simpleType name="ReferencePrestationPriseType">
                 <xsd:restriction base="xsd:string">
                     <xsd:minLength value="0"/>
-                    <xsd:maxLength value="20"/>
+                    <xsd:maxLength value="30"/>
                 </xsd:restriction>
             </xsd:simpleType>
             <xsd:simpleType name="ReferencePriseType">
@@ -35,13 +35,13 @@
             <xsd:simpleType name="ReferencePMTType">
                 <xsd:restriction base="xsd:string">
                     <xsd:minLength value="0"/>
-                    <xsd:maxLength value="20"/>
+                    <xsd:maxLength value="50"/>
                 </xsd:restriction>
             </xsd:simpleType>
             <xsd:simpleType name="ReferencePBOType">
                 <xsd:restriction base="xsd:string">
                     <xsd:minLength value="0"/>
-                    <xsd:maxLength value="30"/>
+                    <xsd:maxLength value="100"/>
                 </xsd:restriction>
             </xsd:simpleType>
             <xsd:simpleType name="IdentifiantFibreType">
@@ -92,7 +92,7 @@
             <xsd:simpleType name="NumeroDechargeType">
                 <xsd:restriction base="xsd:string">
                     <xsd:minLength value="0"/>
-                    <xsd:maxLength value="20"/>
+                    <xsd:maxLength value="50"/>
                 </xsd:restriction>
             </xsd:simpleType>
             <xsd:simpleType name="NaturePBOType">
@@ -152,7 +152,7 @@
             <xsd:simpleType name="ReferenceCablePBOType">
                 <xsd:restriction base="xsd:string">
                     <xsd:minLength value="0"/>
-                    <xsd:maxLength value="30"/>
+                    <xsd:maxLength value="100"/>
                 </xsd:restriction>
             </xsd:simpleType>
             <xsd:simpleType name="InformationFibrePBOType">
@@ -359,8 +359,8 @@
             </xsd:complexType>
             <xsd:complexType name="OperateurCommercialType">
                 <xsd:sequence>
-                    <xsd:element name="Nom" type="xsd:string"/>
-                    <xsd:element minOccurs="0" name="Identifiant" type="xsd:string"/>
+                    <xsd:element name="Nom" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="Identifiant" type="xsd:string"/>
                 </xsd:sequence>
             </xsd:complexType>
             <xsd:complexType name="EnteteReponseType">
@@ -476,6 +476,7 @@
     <wsdl:message name="Emutation_RecherchePBO_OutputMessage">
         <wsdl:part name="response" element="tns:RecherchePBOResponse"/>
     </wsdl:message>
+
     <wsdl:message name="Emutation_ConsultationFibres_InputMessage">
         <wsdl:part name="request" element="tns:ConsultationFibres"/>
     </wsdl:message>

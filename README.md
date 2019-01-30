@@ -21,4 +21,6 @@
      - Ajout de restrictions sur la longueurs des champs comme spécifié dans la documentation
   - Modification du type ListeRouteOptique
      - Ajout d'un maxOccurs=4 afin de respecter la documentation
+- v0.5: Modification des valeurs maxLength et minOccurs pour correspondre à la doc pour les champs suivants:
+  - OperateurCommercialType, ReferenceCablePBOType, NumeroDechargeType, ReferencePBOType, ReferencePMTType, ReferencePrestationPriseType, ReferenceCommandePriseInterneOCType
   
