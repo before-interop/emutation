@@ -1,13 +1,13 @@
 <wsdl:definitions
         xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
-        xmlns:tns="http://interop-fibre.fr/Emutation/1.0/"
+        xmlns:tns="http://interop-fibre.fr/Emutation/1.2/"
         xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
         xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
         xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Emutation"
-        targetNamespace="http://interop-fibre.fr/Emutation/1.0/"
+        targetNamespace="http://interop-fibre.fr/Emutation/1.2/"
 >
     <wsdl:types>
-        <xsd:schema elementFormDefault="qualified" targetNamespace="http://interop-fibre.fr/Emutation/1.0/"  xmlns:tns="http://interop-fibre.fr/Emutation/1.0/">
+        <xsd:schema elementFormDefault="qualified" targetNamespace="http://interop-fibre.fr/Emutation/1.2/"  xmlns:tns="http://interop-fibre.fr/Emutation/1.2/">
 			<xsd:simpleType name="NomModulePMType">
                 <xsd:restriction base="xsd:string">
                     <xsd:minLength value="0"/>
@@ -561,7 +561,7 @@
     <wsdl:binding name="BasicHttpBinding_Emutation" type="tns:Emutation">
         <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
         <wsdl:operation name="RecherchePBO">
-            <soap:operation soapAction="http://interop-fibre.fr/Emutation/1.0/RecherchePBO" style="document"/>
+            <soap:operation soapAction="http://interop-fibre.fr/Emutation/1.2/RecherchePBO" style="document"/>
             <wsdl:input>
                 <soap:body use="literal"/>
             </wsdl:input>
@@ -579,7 +579,7 @@
             </wsdl:fault>
         </wsdl:operation>
         <wsdl:operation name="ConsultationFibres">
-            <soap:operation soapAction="http://interop-fibre.fr/Emutation/1.0/ConsultationFibres" style="document"/>
+            <soap:operation soapAction="http://interop-fibre.fr/Emutation/1.2/ConsultationFibres" style="document"/>
             <wsdl:input>
                 <soap:body use="literal"/>
             </wsdl:input>
@@ -600,7 +600,7 @@
             </wsdl:fault>
         </wsdl:operation>
         <wsdl:operation name="MiseAJourRouteOptique">
-            <soap:operation soapAction="http://interop-fibre.fr/Emutation/1.0/MiseAJourRouteOptique" style="document"/>
+            <soap:operation soapAction="http://interop-fibre.fr/Emutation/1.2/MiseAJourRouteOptique" style="document"/>
             <wsdl:input>
                 <soap:body use="literal"/>
             </wsdl:input>
@@ -623,7 +623,7 @@
     </wsdl:binding>
     <wsdl:service name="Emutation">
         <wsdl:port name="BasicHttpBinding_Emutation" binding="tns:BasicHttpBinding_Emutation">
-            <soap:address location="http://interop-fibre.fr/Emutation/1.0/"/>
+            <soap:address location="http://interop-fibre.fr/Emutation/1.2/"/>
         </wsdl:port>
     </wsdl:service>
 </wsdl:definitions>
