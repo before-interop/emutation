@@ -8,6 +8,42 @@
 >
     <wsdl:types>
         <xsd:schema elementFormDefault="qualified" targetNamespace="http://interop-fibre.fr/Emutation/1.0/"  xmlns:tns="http://interop-fibre.fr/Emutation/1.0/">
+			<xsd:simpleType name="NomModulePMType">
+                <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="256"/>
+                </xsd:restriction>
+            </xsd:simpleType>
+			<xsd:simpleType name="PositionModulePMType">
+                <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="256"/>
+                </xsd:restriction>
+            </xsd:simpleType>
+			<xsd:simpleType name="ReferenceCableModulePMType">
+                <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="256"/>
+                </xsd:restriction>
+            </xsd:simpleType>
+			<xsd:simpleType name="InfoTubeModulePMType">
+                <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="256"/>
+                </xsd:restriction>
+            </xsd:simpleType>
+			<xsd:simpleType name="InfoFibreModulePMType">
+                <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="256"/>
+                </xsd:restriction>
+            </xsd:simpleType>
+			<xsd:simpleType name="ConnecteurPriseCouleurType">
+                <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="256"/>
+                </xsd:restriction>
+            </xsd:simpleType>
             <xsd:simpleType name="ReferenceCommandePriseInterneOCType">
                 <xsd:restriction base="xsd:string">
                     <xsd:minLength value="0"/>
@@ -389,8 +425,8 @@
             <xsd:complexType name="CoordonneesGeographiquesType">
                 <xsd:sequence>
                     <xsd:element name="TypeProjection" type="tns:TypeProjectionType"/>
-                    <xsd:element minOccurs="0" name="CoordonneesX" type="xsd:string"/>
-                    <xsd:element minOccurs="0" name="CoordonneesY" type="xsd:string"/>
+                    <xsd:element minOccurs="1" name="CoordonneesX" type="xsd:float"/>
+                    <xsd:element minOccurs="1" name="CoordonneesY" type="xsd:float"/>
                 </xsd:sequence>
             </xsd:complexType>
             <xsd:complexType name="ReferenceHexacleVoieType">
@@ -445,16 +481,16 @@
                     <xsd:element name="InformationTubePBO" type="tns:InformationTubePBOType"/>
                     <xsd:element name="InformationFibrePBO" type="tns:InformationFibrePBOType"/>
                     <xsd:element name="ConnecteurPriseNumero" type="xsd:int"/>
-                    <xsd:element minOccurs="0" name="ConnecteurPriseCouleur" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="ConnecteurPriseCouleur" type="tns:ConnecteurPriseCouleurType"/>
                 </xsd:sequence>
             </xsd:complexType>
             <xsd:complexType name="PositionPmType">
                 <xsd:sequence>
-                    <xsd:element name="NomModulePM" type="xsd:string"/>
-                    <xsd:element name="PositionModulePM" type="xsd:string"/>
-                    <xsd:element minOccurs="0" name="ReferenceCableModulePM" type="xsd:string"/>
-                    <xsd:element minOccurs="0" name="InfoTubeModulePM" type="xsd:string"/>
-                    <xsd:element minOccurs="0" name="InfoFibreModulePM" type="xsd:string"/>
+                    <xsd:element name="NomModulePM" type="tns:NomModulePMType"/>
+                    <xsd:element name="PositionModulePM" type="tns:PositionModulePMType"/>
+                    <xsd:element minOccurs="0" name="ReferenceCableModulePM" type="tns:ReferenceCableModulePMType"/>
+                    <xsd:element minOccurs="0" name="InfoTubeModulePM" type="tns:InfoTubeModulePMType"/>
+                    <xsd:element minOccurs="0" name="InfoFibreModulePM" type="tns:InfoFibreModulePMType"/>
                 </xsd:sequence>
             </xsd:complexType>
         </xsd:schema>
